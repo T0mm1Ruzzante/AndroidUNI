@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import it.unipd.dei.esp2223.hellowithbuttond.ui.theme.ComposeHelloWithButtonTheme
+import java.lang.NumberFormatException
 
 class MainActivity: ComponentActivity()
 {
@@ -47,9 +48,11 @@ fun MainScreen(modifier: Modifier = Modifier)
 {
     val pleasePress = stringResource(R.string.please_press)
     val goodJob = stringResource(R.string.good_job)
+    val counter = stringResource(R.string.counter)
 
     // Reference: https://developer.android.com/jetpack/compose/state
     var t by remember { mutableStateOf(pleasePress) }
+    var t2 by remember { mutableStateOf(counter) }
 
     // Reference: https://developer.android.com/develop/ui/compose/layouts/constraintlayout
     ConstraintLayout(modifier = modifier) {
@@ -72,6 +75,33 @@ fun MainScreen(modifier: Modifier = Modifier)
                 baseline.linkTo(bu.baseline)
             },
             text = t
+        )
+
+        val (but2, tv2) = createRefs()
+
+        Button(
+            modifier = Modifier.constrainAs(but2) {
+                top.linkTo(bu.bottom)
+                start.linkTo(parent.start, margin = 4.dp)
+            },
+            onClick = {
+                val i : Int = try {
+                    t2.toInt()
+                } catch (e: NumberFormatException) {
+                    -1
+                }
+                t2 = "${i+1}"
+            }
+        ) {
+            Text(text = stringResource(R.string.sbutton))
+        }
+
+        Text(
+            modifier = Modifier.constrainAs(tv2) {
+                start.linkTo(but2.end, margin = 4.dp)
+                baseline.linkTo(but2.baseline)
+            },
+            text = t2
         )
     }
 }

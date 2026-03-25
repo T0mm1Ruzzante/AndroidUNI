@@ -3,4 +3,7 @@
     <string name="press_me">Press me</string>
     <string name="please_press">Press the button, please</string>
     <string name="good_job">Good job!</string>
+
+    <string name="sbutton">+1</string>
+    <string name="counter">0</string>
 </resources>

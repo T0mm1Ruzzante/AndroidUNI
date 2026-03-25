@@ -40,11 +40,14 @@ class MainActivity : AppCompatActivity()
             tv.text = getString(R.string.good_job)
         }
 
-        var count : Int = 0
         // Azione sul secondo bottone
         but2.setOnClickListener {
-            count = count.inc()
-            tv2.text = count.toString()
+            val i : Int = try {
+                tv2.text.toString().toInt()
+            } catch (exception: NumberFormatException) {
+                -1
+            }
+            tv2.text = "${i+1}"
         }
 
         // Ensure that system bars remain visible regardless of the background color.
