@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SecretMessageTheme {
                 val navController = rememberNavController()
-                var text : String = ""
+                var text = ""
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavHost(
@@ -36,15 +36,15 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable("message") {
-                            text = MessageScreen(
-                                onNextClicked = { navController.navigate("result", navOption = {
-                                    popUpTo<RestultScreen.class>{ saveState = true }
-                                    restoreState = true
-                                })}
-                            )
+                            MessageScreen { msg ->
+                                text = msg
+                                navController.navigate("encrypt") {
+                                    popUpTo("message") { inclusive = true }
+                                }
+                            }
                         }
-                        composable("result") {
-                            ResultScreen(text)
+                        composable("encrypt") {
+                            EncryptScreen(text)
                         }
                     }
                 }
