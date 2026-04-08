@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MessageScreen(onNextClicked: (text: String) -> Unit) {
+fun MessageScreen(onNextClicked: (String) -> Unit) {
     var message by rememberSaveable { mutableStateOf("") }
 
     Column(

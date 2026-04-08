@@ -1,6 +1,7 @@
 package com.hfad.secretmessage
 
 import android.os.Bundle
+import android.net.Uri
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -23,7 +24,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             SecretMessageTheme {
                 val navController = rememberNavController()
-                var text = ""
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavHost(
@@ -37,14 +37,13 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("message") {
                             MessageScreen { msg ->
-                                text = msg
-                                navController.navigate("encrypt") {
-                                    popUpTo("message") { inclusive = true }
+                                navController.navigate("encrypt/${Uri.encode(msg)}") {
+                                    popUpTo("welcome")
                                 }
                             }
                         }
-                        composable("encrypt") {
-                            EncryptScreen(text)
+                        composable("encrypt/{message}") { backStackEntry ->
+                            EncryptScreen(Uri.decode(backStackEntry.arguments?.getString("message")))
                         }
                     }
                 }
