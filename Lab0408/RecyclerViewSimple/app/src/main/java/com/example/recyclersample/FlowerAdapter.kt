@@ -29,10 +29,12 @@ class FlowerAdapter(private val flowerList: Array<String>) :
 
     // Describes an item view and its place within the RecyclerView
     class FlowerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val flowerTextView: TextView = itemView.findViewById(R.id.flower_text)
+        private val flowerNumberTextView: TextView = itemView.findViewById(R.id.flower_number)
+        private val flowerNameTextView: TextView = itemView.findViewById(R.id.flower_text)
 
-        fun bind(word: String) {
-            flowerTextView.text = word
+        fun bind(num: Int, word: String) {
+            flowerNumberTextView.text = String.format("%02d", num+1)
+            flowerNameTextView.text = word
         }
     }
 
@@ -52,6 +54,7 @@ class FlowerAdapter(private val flowerList: Array<String>) :
 
     // Displays data at a certain position
     override fun onBindViewHolder(holder: FlowerViewHolder, position: Int) {
-        holder.bind(flowerList[position])
+        holder.bind(position, flowerList[position])
+        Log.v(mTag, "VIEW HOLDER RIEMPITO DI DATI")
     }
 }

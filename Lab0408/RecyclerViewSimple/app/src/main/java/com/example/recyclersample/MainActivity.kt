@@ -18,6 +18,7 @@ package com.example.recyclersample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.RecyclerView
 
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     val mTag = this.javaClass.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.v(mTag, "ENTER THE onCreate FUNCTION")
 
         // Enable edge-to-edge display on API level < 35
         WindowCompat.enableEdgeToEdge(window)
