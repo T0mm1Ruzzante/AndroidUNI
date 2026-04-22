@@ -16,6 +16,8 @@
 
 package com.example.recyclersample
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,9 +25,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FlowerAdapter(private val flowerList: Array<String>) :
+class FlowerAdapter(private val flowerList: Array<String>, context: Context) :
     RecyclerView.Adapter<FlowerAdapter.FlowerViewHolder>() {
     val mTag = this.javaClass.simpleName
+    private val context = context
 
     // Describes an item view and its place within the RecyclerView
     class FlowerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -43,6 +46,14 @@ class FlowerAdapter(private val flowerList: Array<String>) :
         Log.v(mTag, "CREATO UN VIEW HOLDER")
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.flower_item, parent, false)
+
+        val tv: TextView = view.findViewById(R.id.flower_text)
+        tv.setOnClickListener {
+            val myIntent = Intent(context, DetailActivity::class.java).apply{
+                putExtra(DetailActivity.FLOWER_NAME, R.id.flower_text)
+            }
+            context.startActivity(myIntent)
+        }
 
         return FlowerViewHolder(view)
     }

@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     val mTag = this.javaClass.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.v(mTag, "ENTER THE onCreate FUNCTION")
+        Log.v(mTag, "ENTER THE onCreate MainActivity FUNCTION")
 
         // Enable edge-to-edge display on API level < 35
         WindowCompat.enableEdgeToEdge(window)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val flowerList = Datasource(this).getFlowerList()
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-        recyclerView.adapter = FlowerAdapter(flowerList)
+        recyclerView.adapter = FlowerAdapter(flowerList, this)
 
         // Ensure that system bars remain visible regardless of the background color:
         // done via XML styling

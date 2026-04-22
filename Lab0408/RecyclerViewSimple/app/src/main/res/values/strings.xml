@@ -38,4 +38,5 @@
         <item>Tulip</item>
         <item>Dandelion</item>
     </string-array>
+    <string name="flower_string">FioreFioreFiore</string>
 </resources>
